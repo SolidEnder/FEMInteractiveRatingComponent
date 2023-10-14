@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<link rel="stylesheet" href="interactiveRatingComponent.css" />
+	<link rel="icon" href="C:\Users\bryan\OneDrive\Documents\InterativeRatingComponent\favicon-32x32.png" />
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Overpass:wwgth@400;700&display=swap" rel="stylesheet">
+	
+	<title>Front-End Mentor | Interactive Rating Component</title>
+	
+</head>
+<body>
+	<main class="display"><!--main display wrapper-->
+		<article class="ratingWindow"><!--first window-->
+			<section class="ratingSection"> <!--content inside of the rating window-->
+				<header class="rateIcon"><!--Star icon at the top of the page-->
+					<img src="file:///C:/Users/bryan/OneDrive/Documents/InterativeRatingComponent/icon-star.svg" alt="star">
+				</header>
+				<h2 class="feedbackHead">How did we do?</h2>
+        <p class="feedbackMsg">Please let us know how we did with your support request. All
+  		feedback is appreciated to help us improve our offering</p>
+        <nav class="ratings">
+        	<span>1</span>
+        	<span>2</span>
+        	<span>3</span>
+        	<span>4</span>
+        	<span>5</span>
+        </nav>
+        <button class="submitBtn">
+        	SUBMIT
+        </button>
+			</section>
+		</article>
+		<article class="completeWindow hidden"><!--second window, hidden by default-->
+			<img src="file:///C:/Users/bryan/OneDrive/Documents/InterativeRatingComponent/illustration-thank-you.svg" alt="Thank you!" />
+			<section class="result"><!--displays the result, using JS-->
+				<p>You selected <span id="ratingGiven"></span> out of 5 stars</p>
+			</section>
+			<h2 class="finalHead">Thank you!</h2>
+			<p class="finalMsg">We appreciate you taking the time to give a rating. If you ever need
+  			more support, don't hesitate to get in touch!</p>
+		</article>
+	</main>
+</body>
+<script>
+    //rating section
+    const ratingSelection = document.querySelectorAll(".ratings span");
+    const submitBtn = document.querySelector(".submitBtn");
+    const pointSelected = document.getElementById("ratingGiven");
+    //windows
+    const ratingWindow = document.querySelector(".ratingWindow");
+    const completeWindow = document.querySelector(".completeWindow");
+	
+    let ratings = null;//default
+	
+	  //if a rating is selected, the background stays orange
+	  ratingSelection.forEach((ratingSelection) => {
+	    ratingSelection.addEventListener("click", (e) =>{
+			  const active = document.querySelector(".checked");
+			  
+			  if (active) {
+				  active.classList.remove("checked");
+			  }//adds rating to span tag
+			  const selected = e.target;
+			  
+			  selected.classList.add("checked");
+			  ratings = e.target.textContent;
+			  pointSelected.textContent = ratings;
+		  });
+	  })
+	
+	  //ratings window disappears, and the thank you message displays
+	  submitBtn.addEventListener("click", () => {
+		  completeWindow.classList.remove("hidden");
+		  ratingWindow.style.display = "none";
+    });
+</script>
+</html>
